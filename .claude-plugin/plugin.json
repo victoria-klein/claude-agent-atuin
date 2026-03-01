@@ -1,0 +1,9 @@
+{
+  "name": "atuin-memory",
+  "version": "0.1.0",
+  "description": "Structured memory and history integration via atuin",
+  "author": { "name": "Atuin" },
+  "repository": "https://github.com/victoria-klein/claude-agent-atuin",
+  "license": "MIT",
+  "keywords": ["memory", "history", "structured", "agent", "executable", "bash"]
+}

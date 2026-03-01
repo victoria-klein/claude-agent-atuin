@@ -1,0 +1,30 @@
+{
+  "description": "Atuin memory integration hooks for Claude Code",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/session-start.sh",
+            "timeout": 10,
+            "statusMessage": "Initializing atuin memory..."
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/subagent-start.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
