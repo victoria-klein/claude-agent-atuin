@@ -8,7 +8,7 @@ BINARY="${BIN_DIR}/agent-atuin"
 # --- Release download settings ---
 # Update this URL when releases are published
 RELEASE_URL="https://github.com/victoria-klein/agent-atuin/releases"
-VERSION="latest"
+VERSION="v0.1.0"
 
 detect_platform() {
   local os arch
@@ -32,20 +32,27 @@ detect_platform() {
 
 download_binary() {
   local platform="$1"
-  local url="${RELEASE_URL}/download/${VERSION}/agent-atuin-${platform}"
+  local archive="atuin-${platform}.tar.gz"
+  local url="${RELEASE_URL}/download/${VERSION}/${archive}"
+  local tmpdir
 
-  echo "Downloading agent-atuin for ${platform}..."
+  echo "Downloading agent-atuin ${VERSION} for ${platform}..."
   echo "  URL: ${url}"
 
+  tmpdir="$(mktemp -d)"
+  trap 'rm -rf "${tmpdir}"' RETURN
+
   if command -v curl &> /dev/null; then
-    curl -fsSL -o "${BINARY}" "${url}"
+    curl -fsSL -o "${tmpdir}/${archive}" "${url}"
   elif command -v wget &> /dev/null; then
-    wget -q -O "${BINARY}" "${url}"
+    wget -q -O "${tmpdir}/${archive}" "${url}"
   else
     echo "Error: neither curl nor wget found"
     return 1
   fi
 
+  tar xzf "${tmpdir}/${archive}" -C "${tmpdir}"
+  mv "${tmpdir}/atuin" "${BINARY}"
   chmod +x "${BINARY}"
   echo "Downloaded agent-atuin to ${BINARY}"
 }
