@@ -1,10 +1,14 @@
 # claude-agent-atuin
 
-A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin that gives **Claude persistent, searchable and executable memory** backed by [agent-atuin](https://github.com/victoria-klein/agent-atuin). Shell commands run during a session are automatically tracked, and memories can be created that link back to the exact commands that produced them.
+## What
+A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin that **gives Claude persistent, linkable command memory** backed by [agent-atuin](https://github.com/victoria-klein/agent-atuin) that can be **recalled and replayed without re-generating anything**.
+
+## Why
+Agents working in the shell frequently re-derive scripts they've already written because they have no memory of prior commands across sessions. Even within a session, recalling a multi-step workflow means re-reading or rewriting it, wasting context.
 
 ## Features
 
-- **Automatic command tracking** — every shell command Claude runs is recorded via atuin history, with no extra effort from the user.
+- **Automatic command tracking** — every shell command Claude runs is recorded via atuin history, with no extra effort from the user or agent.
 - **Structured memories** — create memories with descriptions and linked commands so you can recall *how* something was done, not just *that* it was done.
 - **Cross-session recall** — search past memories by description or command content across all previous sessions.
 - **Replay workflows** — preview and re-run command sequences from past memories with a dry-run safety step.
